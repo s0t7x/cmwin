@@ -1,10 +1,6 @@
 <p align="center">
-	cmwin
-
 get crossplatform cmake projects in windows build with ease
-</p>
 
-Usage:
 ````
 	cmwin.exe <source> <build_path> <architecture>
 
