@@ -1,0 +1,63 @@
+@ECHO OFF
+REM !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+REM !!! 		UNCOMPILED BATCH ONLY WORKS WITH		!!!
+REM !!!   	CORRECT START PARAMETERS OR IN CORRECT DIRECTORY!	!!!
+REM !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+setlocal ENABLEEXTENSIONS
+rem DisableQuickEdit
+set source=%1
+if [%source%] == [] (set source=.)
+set buildpath=%2
+if [%buildpath%] == [] (set buildpath=build)
+set architecture=%3
+if [%architecture%] == [] (set architecture=x64)
+:cm
+cls
+echo                         _       
+echo                        (_)      
+echo   ___ _ __ _____      ___ _ __  
+echo  / __^|  _ ^' _ \ \ /\ / / ^|  _ \ 
+echo ^| (__^| ^| ^| ^| ^| \ V  V /^| ^| ^| ^| ^|
+echo  \___^|_^| ^|_^| ^|_^|\_/\_/ ^|_^|_^| ^|_^|
+echo              by s0t7x
+echo.                                 
+echo.
+cd %source%
+if exist CMakeLists.txt (
+	del cmwin.log.txt > nul
+	rmdir /S /Q %buildpath%\%architecture% > nul
+	set KEY_NAME="SOFTWARE\Microsoft\VisualStudio\15.0"
+	echo Generating Visual Studio Solution...
+	cmake -G "Visual Studio 15 2017" -A %architecture% -S %source% -B %buildpath%\%architecture% > cmwin.log.txt
+	if exist %buildpath%\%architecture%\ALL_BUILD.vcxproj (
+		echo Deploy to %buildpath%/%architecture%/Release...
+		cmake --build %buildpath%\%architecture% --config Release >> cmwin.log.txt
+		if exist "%buildpath%\%architecture%\Release\*.exe" (
+rem PrintColor "Done!" 10 0
+			goto end
+		) else (
+rem PrintColor "something went wrong while building!" 12 0
+rem PrintReturn
+			goto err
+		)
+	) else (
+rem PrintColor "error generating!" 12 0
+rem PrintReturn
+		goto err
+	)
+) else (
+rem PrintColor "CMakeLists.txt not found in: %source%" 12 0
+rem PrintReturn
+goto openCMakeLists
+)
+:openCMakeLists
+rem PrintColor "Please select a folder containing CMakeLists.txt..." 12 0
+rem Wait 200
+rem BrowseFolder
+set source=%result%
+goto cm
+:err
+rem PrintColor "look into cmwin.log.txt" 12 0
+rem PrintReturn
+:end
+pause > nul
