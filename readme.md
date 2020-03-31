@@ -2,7 +2,8 @@
 ## get crossplatform cmake projects in windows build with ease
 
 Usage:
-	```` cmwin.exe <source> <build_path> <architecture>
+````
+	cmwin.exe <source> <build_path> <architecture>
 
 	<source> = dir to CMakeLists.txt
 	ex. C:\Users\me\myProject
