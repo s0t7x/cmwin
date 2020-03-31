@@ -19,5 +19,5 @@ If you would like to use the uncompiled batch itself, it only works with CMakeLi
 
 The release binary is a bit more comfortable and asks you for the file if CMakeLists.txt is not found.
 
-Currently *only supported* with *Visual Studio 15 2017*!
+Currently **only supported** with **Visual Studio 15 2017**
 But with a bit of fiddle it is easy to adjust the Batchfile.
