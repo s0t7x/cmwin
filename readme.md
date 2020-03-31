@@ -1,5 +1,8 @@
-# cmwin
-## get crossplatform cmake projects in windows build with ease
+<p align="center">
+	cmwin
+
+get crossplatform cmake projects in windows build with ease
+</p>
 
 Usage:
 ````
