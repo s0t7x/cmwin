@@ -17,7 +17,7 @@ get crossplatform cmake projects in windows build with ease
 
 If you would like to use the uncompiled batch itself, it only works with CMakeLists.txt in same directory OR correct startparameters!
 
-The release binary is a bit more comfortable and asks you for the file if CMakeLists.txt is not found.
+The release binary is compiled from AdvancedBatch (cmwin.adv) which is a bit more comfortable and asks you for the file if CMakeLists.txt is not found.
 
 ![](https://files.catbox.moe/xgq2yt.png)
 
